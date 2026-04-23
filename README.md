@@ -146,6 +146,7 @@ If you find _Pointcept_ useful to your research, please cite our work as encoura
 
 - [Installation](#installation)
 - [Data Preparation](#data-preparation)
+- [Git Workflow](#git-workflow)
 - [Quick Start](#quick-start)
 - [Model Zoo](#model-zoo)
 - [Acknowledgement](#acknowledgement)
@@ -515,6 +516,71 @@ https://huggingface.co/datasets/Pointcept/nuscenes-compressed)] (only processed 
   ln -s ${PROCESSED_WAYMO_DIR} ${CODEBASE_DIR}/data/waymo
   ```
 
+### FOR-InstanceV2
+- Download the raw FOR-InstanceV2 point clouds and organize the files as follows:
+  ```bash
+  FOR_INSTANCEV2_RAW_DIR
+  │── train_val_data
+  │   │── xxx_train.ply
+  │   │── xxx_val.ply
+  │── test_data
+  │   │── xxx_test.ply
+  ```
+- Run preprocessing code:
+  ```bash
+  # FOR_INSTANCEV2_RAW_DIR: the directory of raw FOR-InstanceV2.
+  # PROCESSED_FOR_INSTANCEV2_DIR: the output directory.
+  python pointcept/datasets/preprocessing/for_instancev2/preprocess_for_instancev2.py \
+    --dataset_root ${FOR_INSTANCEV2_RAW_DIR} \
+    --output_root ${PROCESSED_FOR_INSTANCEV2_DIR} \
+    --semantic_map 1:0,2:1,3:2 \
+    --tree_segment_ids 1,2 \
+    --chunk_points 2000000 \
+    --num_workers 1
+  ```
+- (Optional) Use shell wrapper:
+  ```bash
+  bash pointcept/datasets/preprocessing/for_instancev2/preprocess_for_instancev2.sh -d ${FOR_INSTANCEV2_RAW_DIR} -o ${PROCESSED_FOR_INSTANCEV2_DIR}
+  ```
+- Link processed dataset to the codebase:
+  ```bash
+  mkdir -p data
+  ln -s ${PROCESSED_FOR_INSTANCEV2_DIR} ${CODEBASE_DIR}/data/for_instancev2
+  ```
+
+### WHU-Stree
+- Download the raw WHU-Stree data. The preprocessor supports either:
+  - `split_samples/{train,val,test}` layout, or
+  - `road_id/PCD/*.ply` with split txt files.
+- Run preprocessing code:
+  ```bash
+  # WHU_STREE_RAW_DIR: the directory of raw WHU-Stree.
+  # PROCESSED_WHU_STREE_DIR: the output directory.
+  python pointcept/datasets/preprocessing/whu_stree/preprocess_whu_stree.py \
+    --dataset_root ${WHU_STREE_RAW_DIR} \
+    --output_root ${PROCESSED_WHU_STREE_DIR} \
+    --chunk_points 1000000 \
+    --num_workers 1 \
+    --test_label_source reference \
+    --intensity_scale 65535
+  ```
+- (Optional) Use shell wrapper:
+  ```bash
+  bash pointcept/datasets/preprocessing/whu_stree/preprocess_whu_stree.sh -d ${WHU_STREE_RAW_DIR} -o ${PROCESSED_WHU_STREE_DIR}
+  ```
+- Check processed dataset integrity before training:
+  ```bash
+  python tools/check_forest_dataset.py --dataset_root ${PROCESSED_WHU_STREE_DIR} --strict
+  python tools/check_forest_dataset.py --dataset_root ${PROCESSED_FOR_INSTANCEV2_DIR} --strict
+  ```
+- Link processed dataset to the codebase:
+  ```bash
+  mkdir -p data
+  ln -s ${PROCESSED_WHU_STREE_DIR} ${CODEBASE_DIR}/data/whu_stree
+  ```
+
+For downstream training/testing configs, see `pointcept/docs/forest_downstream_quickstart.md`.
+
 ### ModelNet40
 - Download [modelnet40_normal_resampled.zip](https://huggingface.co/datasets/Pointcept/modelnet40_normal_resampled-compressed) and unzip.
 - Link dataset to the codebase.
@@ -550,6 +616,18 @@ https://huggingface.co/datasets/Pointcept/nuscenes-compressed)] (only processed 
   mkdir -p data
   ln -s ${RAW_PARTNETE_DIR} ${CODEBASE_DIR}/data/
   ```
+
+## Git Workflow
+
+For deep learning research with safe commit / rollback / tagging practice in this repository, see:
+
+- `pointcept/docs/git_workflow_zh.md`
+
+One-command local setup:
+
+```bash
+bash scripts/setup_git_workflow.sh
+```
 
 ## Quick Start
 
