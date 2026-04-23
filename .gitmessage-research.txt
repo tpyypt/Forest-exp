@@ -1,0 +1,19 @@
+# <type>(<scope>): <summary>
+#
+# type:
+#   feat      新增功能/模块
+#   fix       缺陷修复
+#   exp       实验性改动（超参数、loss、结构尝试）
+#   refactor  重构（不改变行为）
+#   docs      文档
+#   chore     工程维护
+#   revert    回滚
+#
+# scope 示例:
+#   model, loss, train, data, eval, config, infra
+#
+# 正文建议（可选）：
+# - Why: 为什么改
+# - What: 改了什么
+# - Impact: 指标/显存/速度影响
+# - Reproduce: 关键命令和 config
