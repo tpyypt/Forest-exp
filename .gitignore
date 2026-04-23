@@ -1,16 +1,166 @@
-image/
-__pycache__
-**/build/
-**/*.egg-info/
-**/dist/
+# --------------------------
+# OS / Editor
+# --------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --------------------------
+# Python / Conda / Virtualenv
+# --------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
 *.so
-exp
-weights
-data
-*log*
-outputs/
-.vscode
-.idea
-*/.DS_Store
+.python-version
+
+.venv/
+venv/
+env/
+ENV/
+.conda/
+conda-env/
+pip-wheel-metadata/
+
+# --------------------------
+# Build / Package
+# --------------------------
+build/
+dist/
+**/build/
+**/dist/
+*.egg-info/
+**/*.egg-info/
+
+# --------------------------
+# Local data roots
+# Keep these root-anchored so source files under pointcept/datasets/
+# are not accidentally hidden from git.
+# --------------------------
+/data/
+/dataset/
+/datasets/
+/raw_data/
+/processed_data/
+/preprocessed/
+/data_root/
+/data_cache/
+/cache/
+/tmp/
+/temp/
+
+# --------------------------
+# Experiments / Artifacts
+# --------------------------
+/exp/
+/experiments/
+/outputs/
+/output/
+/results/
+/runs/
+/work_dirs/
+/predictions/
+/submissions/
+/visualizations/
+/image/
+
+/checkpoints/
+/checkpoint/
+/weights/
+/pretrained/
+/pretrained_models/
+/model_zoo/
+
+# --------------------------
+# Model files
+# --------------------------
+*.pth
+*.pt
+*.ckpt
+*.pkl
+*.pickle
+*.joblib
+*.onnx
+*.engine
+*.trt
+*.safetensors
+
+# --------------------------
+# 3D / Point-cloud data
+# --------------------------
+*.ply
+*.pcd
+*.las
+*.laz
+*.e57
+*.pts
+*.xyz
+*.xyzn
+*.xyzrgb
+*.obj
+*.off
+*.glb
+*.gltf
+*.bin
+
+# --------------------------
+# Array / Dataset shards
+# --------------------------
+*.npy
+*.npz
+*.h5
+*.hdf5
+*.lmdb
+*.mdb
+*.arrow
+*.parquet
+*.tfrecord
+*.record
+
+# --------------------------
+# Archives
+# --------------------------
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.tar.bz2
+*.tbz2
+*.tar.xz
+*.txz
+*.7z
+*.rar
+
+# --------------------------
+# Logging / Tracking
+# --------------------------
+*.log
+logs/
+log/
+wandb/
+mlruns/
+tensorboard/
+tb_logs/
+events.out.tfevents.*
+
+# --------------------------
+# Notebook / Test / Tool Cache
+# --------------------------
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.nox/
+.tox/
+.coverage
+coverage.xml
+htmlcov/
+
+# --------------------------
+# Misc
+# --------------------------
 **/*.out
-Dockerfile
