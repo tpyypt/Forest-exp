@@ -136,6 +136,11 @@ dist/
 *.rar
 
 # --------------------------
+# Local binary references
+# --------------------------
+/pointcept/docs/*.pdf
+
+# --------------------------
 # Logging / Tracking
 # --------------------------
 *.log
